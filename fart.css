@@ -1,0 +1,67 @@
+
+  #flexbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin: 0;
+  }
+  .wheel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #3498db;
+    overflow: hidden;
+  }
+
+  .wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    position: relative;
+    transform: rotate(45deg);
+  }
+
+  .slice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 50%, 100% 100%, 0 100%);
+    overflow: hidden;
+  }
+
+  .slice .decor {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 30px 25px 0;
+    border-color: transparent transparent transparent transparent;
+    transform: translateX(-50%);
+  }
+
+  .slice:nth-child(1) { background: #e74c3c; transform: rotate(0deg); }
+  .slice:nth-child(2) { background: #2ecc71; transform: rotate(45deg); }
+  .slice:nth-child(3) { background: #f39c12; transform: rotate(90deg); }
+  .slice:nth-child(4) { background: #3498db; transform: rotate(135deg); }
+  .slice:nth-child(5) { background: #9b59b6; transform: rotate(180deg); }
+  .slice:nth-child(6) { background: #e67e22; transform: rotate(225deg); }
+  .slice:nth-child(7) { background: #1abc9c; transform: rotate(270deg); }
+  .slice:nth-child(8) { background: #34495e; transform: rotate(315deg); }
+
+  .label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
