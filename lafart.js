@@ -18,7 +18,7 @@
                 function shuffle(array){
                     array.sort(() => Math.random() - .50);
                 }                  
-                let arr = [awaitJSON.results[i].incorrect_answers.forEach((result)=> result), awaitJSON.results[i].correct_answer];
+                let arr = [awaitJSON.results[i].incorrect_answers.forEach((result)=> arr.push(result)), awaitJSON.results[i].correct_answer];
                 console.log(arr)
                 correctAnswers.push(awaitJSON.results[i].correct_answer)
             }
