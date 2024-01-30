@@ -12,15 +12,36 @@
             let awaitJSON = await response.json()
             console.log(awaitJSON)
             for(i=0; i < awaitJSON.results.length; i++){
-                
-                let userAns = prompt(awaitJSON.results[i].question)
-                userAnswers.push(userAns)
+
+                let arr = []
+                awaitJSON.results[i].incorrect_answers.forEach((answer)=> arr.push(answer))
+                arr.push(awaitJSON.results[i].correct_answer)
                 function shuffle(array){
                     array.sort(() => Math.random() - .50);
-                }                  
-                let arr = [awaitJSON.results[i].incorrect_answers.forEach((result)=> arr.push(result)), awaitJSON.results[i].correct_answer];
-                console.log(arr)
+                }
+                shuffle(arr)
+                function setAnswers(){
+                    for (let i = 0; i < Math.min(randomWordsArray.length, 4); i++) {
+                        let currentLetter = String.fromCharCode('a'.charCodeAt(0) + i);
+                        arr[i] = currentLetter + ': ' + randomWordsArray[i];
+                    }
+                }
+                setAnswers()
+                let userAns = prompt(`${awaitJSON.results[i].question}`)
+                function getWordByLetter(letter) {
+                    const letterMapping = {
+                      'A': 0,
+                      'B': 1,
+                      'C': 2,
+                      'D': 3
+                    };
+                  
+                    const index = letterMapping[letter.toUpperCase()];
+                    return arr[index];
+                }
+                userAnswers.push(getWordByLetter(userAns))
                 correctAnswers.push(awaitJSON.results[i].correct_answer)
+                
             }
             console.log(userAnswers,correctAnswers)
             //gamePlay === 'n'
