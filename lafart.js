@@ -17,18 +17,18 @@ async function main() {
         alert(`Welcome. You will be assigned 10 questions to solve based on a randomized category. The difficulty will automatically be set to easy. Pick your answers based on A, B, C, or D. Your category is: ${awaitJSON.results[0].category}`)
         
         for (let i = 0; i < awaitJSON.results.length; i++) {
-          let arr = [];
-          awaitJSON.results[i].incorrect_answers.forEach((answer) => arr.push(answer));
-          arr.push(awaitJSON.results[i].correct_answer);
+          let compiledAnswers = [];
+          awaitJSON.results[i].incorrect_answers.forEach((answer) => compiledAnswers.push(answer));
+          compiledAnswers.push(awaitJSON.results[i].correct_answer);
 
           function shuffle(array) {
             array.sort(() => Math.random() - 0.5);
           }
-          shuffle(arr);
+          shuffle(compiledAnswers);
 
           let questionAnswered = false;
           while (!questionAnswered) {
-            let userAns = prompt(`${awaitJSON.results[i].question}, \n\n ${arr}`).toUpperCase();
+            let userAns = prompt(`${awaitJSON.results[i].question}, \n\n ${compiledAnswers}`).toUpperCase();
             if (userAns != 'A' && userAns != 'B' && userAns != 'C' && userAns != 'D') {
               alert('Not a valid letter. Please choose A, B, C, or D.');
               continue;
@@ -41,11 +41,13 @@ async function main() {
                   'D': 3
                 };
                 const index = letterMapping[letter.toUpperCase()];
-                return arr[index];
+                return compiledAnswers[index];
               }
-
-              userAnswers.push(getWordByLetter(userAns));
-              correctAnswers.push(awaitJSON.results[i].correct_answer);
+              let UA = getWordByLetter(userAns)
+              let CA = awaitJSON.results[i].correct_answer
+              alert(`You picked ${UA}. The correct answer was ${CA}.`)
+              userAnswers.push(UA);
+              correctAnswers.push(CA);
               questionAnswered = true;
               break;
             }
@@ -53,7 +55,7 @@ async function main() {
         }
         
         let numberCorrect = 0;
-        for (let i = 0; i <= 9; i++) {
+        for (let i = 0; i <= userAnswers.length; i++) {
           if (userAnswers[i] === correctAnswers[i]) {
             numberCorrect++;
           }
