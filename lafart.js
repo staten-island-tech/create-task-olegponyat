@@ -1,5 +1,4 @@
 let gamePlay = 'y';
-let numberCorrect = 0;
 
 async function main() {
   while (gamePlay === 'y') {
@@ -15,8 +14,8 @@ async function main() {
       try {
         let response = await fetch(URL);
         let awaitJSON = await response.json();
-        console.log(awaitJSON)
         alert(`Welcome. You will be assigned 10 questions to solve based on a randomized category. The difficulty will automatically be set to easy. Pick your answers based on A, B, C, or D. Your category is: ${awaitJSON.results[0].category}`)
+        
         for (let i = 0; i < awaitJSON.results.length; i++) {
           let arr = [];
           awaitJSON.results[i].incorrect_answers.forEach((answer) => arr.push(answer));
@@ -26,6 +25,7 @@ async function main() {
             array.sort(() => Math.random() - 0.5);
           }
           shuffle(arr);
+
           let questionAnswered = false;
           while (!questionAnswered) {
             let userAns = prompt(`${awaitJSON.results[i].question}, \n\n ${arr}`).toUpperCase();
@@ -51,12 +51,11 @@ async function main() {
             }
           }
         }
-
+        
+        let numberCorrect = 0;
         for (let i = 0; i <= 9; i++) {
           if (userAnswers[i] === correctAnswers[i]) {
             numberCorrect++;
-          } else {
-            numberCorrect
           }
         }
         alert(`You got a total of ${numberCorrect} right out of 10. Cool beans`)
@@ -67,8 +66,8 @@ async function main() {
 
     await getData(URL);
 
-    let fart = prompt('Do you want to play again? (y or n)').toLowerCase();
-    if (fart === 'y') {
+    let continueGame = prompt('Do you want to play again? (y or n)').toLowerCase();
+    if (continueGame === 'y') {
       gamePlay = 'y';
     } else {
       gamePlay = 'n';
