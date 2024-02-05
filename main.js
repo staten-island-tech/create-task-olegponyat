@@ -28,7 +28,7 @@ async function main() {
 
           let questionAnswered = false;
           while (!questionAnswered) {
-            let userAns = prompt(`${awaitJSON.results[i].question}, \n\n ${compiledAnswers}`).toUpperCase();
+            let userAns = prompt(`Question ${i+1}: ${awaitJSON.results[i].question}, \n\n ${compiledAnswers}`).toUpperCase();
             if (userAns != 'A' && userAns != 'B' && userAns != 'C' && userAns != 'D') {
               alert('Not a valid letter. Please choose A, B, C, or D.');
               continue;
