@@ -14,7 +14,7 @@ async function main() {
       try {
         let response = await fetch(URL);
         let awaitJSON = await response.json();
-        alert(`Welcome. You will be assigned 10 questions to solve based on a randomized category. The difficulty will automatically be set to easy. Pick your answers based on A, B, C, or D. Your category is: ${awaitJSON.results[0].category}`)
+        alert(`Welcome. You will be assigned 10 questions to solve based on a randomized category. Pick your answers based on A, B, C, or D. Your category is: ${awaitJSON.results[0].category}`)
         
         for (let i = 0; i < awaitJSON.results.length; i++) {
           let compiledAnswers = [];
@@ -55,7 +55,7 @@ async function main() {
         }
         
         let numberCorrect = 0;
-        for (let i = 0; i <= userAnswers.length; i++) {
+        for (let i = 0; i < userAnswers.length; i++) {
           if (userAnswers[i] === correctAnswers[i]) {
             numberCorrect++;
           }
